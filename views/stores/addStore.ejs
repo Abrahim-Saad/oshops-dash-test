@@ -1,0 +1,206 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+<script>
+let addedNumbers = [];
+function isValid(num) {
+    let regex = /^\d+$/;
+    let isValid = regex.test(num);
+    if (isValid) return true; else return false;
+}
+
+function isEmpty(num) {
+    if (num == "") return true; else  return false;
+}
+
+function findNumberInList(numList, num) {
+    let numberFound = numList.includes(num);
+    if (numberFound) return true; else return false;
+    
+}
+
+
+function addNewPhoneNumberInput() {
+    let number = telephoneNumber.value;
+    if (!isEmpty(number)) {
+        if (isValid(number)) {
+            if (findNumberInList(addedNumbers, number)) {
+                let msg = `<div class="alert alert-danger" role="alert">Phone number already exists!</div>`;
+                document.getElementById('msg').innerHTML = msg;
+                setTimeout(() => {
+                    msg = '';
+                    document.getElementById('msg').innerHTML = msg;
+
+                }, 2000);
+            }
+            else if (!findNumberInList(addedNumbers, number)) {
+                addedNumbers.push(number);
+
+                telephoneNumber.value = "";
+                
+
+                let msg = `<div class="alert alert-success" role="alert">Phone number added!</div>`;
+                document.getElementById('msg').innerHTML = msg;
+                setTimeout(() => {
+                    msg = '';
+                    document.getElementById('msg').innerHTML = msg;
+                }, 2000);
+                viewAddedPhoneNumbers();
+            }
+        }
+        else {
+            let msg = `<div class="alert alert-danger" role="alert">Please enter a valid phone number!</div>`;
+            document.getElementById('msg').innerHTML = msg;
+            setTimeout(() => {
+                msg = '';
+                document.getElementById('msg').innerHTML = msg;
+            }, 2000);
+        }
+    }
+    else {
+        let msg = `<div class="alert alert-danger" role="alert">Please enter a phone number!</div>`;
+        document.getElementById('msg').innerHTML = msg;
+        console.log("no value");
+        setTimeout(() => {
+            msg = '';
+            document.getElementById('msg').innerHTML = msg;
+
+        }, 2000);
+    }
+}
+
+
+function createRow(i) {
+    return `<li class="list-group-item" id="${i}">
+    <i class="fas fa-times text-danger mr-5" onclick="removeNumber('${i}')" style="position: relative; font-size: larger; cursor:pointer;">
+    </i>${addedNumbers[i]} </li>
+    <input hidden type="tel" value="${addedNumbers[i]}" name="telephoneNumbers" id="allNumbers">`;
+}
+
+
+function viewAddedPhoneNumbers() {
+    let info = `<li class="list-group-item disabled" aria-disabled="true" id="addedHeader">Added Numbers</li>`;
+    for (var i = 0; i < addedNumbers.length; i++) info += createRow(i);
+    document.getElementById("viewAddedPhoneNumbers").innerHTML = info;
+}
+
+
+function removeNumber(index) {
+    addedNumbers.splice(index, 1);
+    console.log(addedNumbers);
+    viewAddedPhoneNumbers();
+}
+
+
+
+</script>
+
+<div class="main-content">
+    <%-include("../shared/head.ejs")  %> 
+
+    <main>
+        <div>
+            <div id='msg'>
+
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <div>
+                    <h2>Add Store</h2>
+                </div>
+                <div>
+                    <a href="/viewStores">View all stores</a>
+                </div>
+            </div>
+
+            <div id="storesForm" class="ml-3">
+                <form action="/addStore" method="post" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="storeName" class="col-sm-2 col-form-label">Store name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="storeName" class="form-control" id="storeName">
+                        </div>
+                    </div>
+
+                    <div id="telephoneNumbersInputs" class="mt-5">
+                        <div class="mb-3 row">
+                            <label for="telephoneNumber" class="col-sm-2 col-form-label">Store telephone number</label>
+                            <div class="form-group col-sm-8">
+                                <input class="form-control" type="tel" id="telephoneNumber" >
+                            </div>
+                            
+                            <div class="form-group col-sm-2">
+                                <button type="button" class="btn btn-success" onclick="addNewPhoneNumberInput()" id="addNewNumBtn">Add number</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        <ul class="list-group col-6" id="viewAddedPhoneNumbers">
+                            
+                        </ul>
+                    </div>
+                
+
+                    <div class="mb-3 row mt-5">
+                        <label for="storeWebsite" class="col-sm-2 col-form-label">Store website</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="storeWebsite" class="form-control" id="storeWebsite">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="categoryList" class="col-sm-2 col-form-label">Store categories</label>
+                        <div class="col-sm-10" id="categoryList">
+                            <% for( let index = 0; index < allCategories.length; index++ ) { %>
+                                <div class="form-check" class="mt-5">
+                                    <input class="form-check-input" name="storeCategories" type="checkbox" value="<%=allCategories[index]._id%>" id="<%=allCategories[index]._id%>">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    <%=allCategories[index].categoryName%>
+                                    </label>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+
+
+                
+                    <div class="mb-5 row">
+                        <label class="col-sm-4 col-form-label">The Products Can be added to Cart</label>
+                        <label class="switch form-group">
+                            <input id="canBeAddedToCart" name="canBeAddedToCart" type="checkbox" class="form-control">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="mb-5 row">
+                        <label class="col-sm-4 col-form-label">The Products of this store are Comparable</label>
+                        <label class="switch form-group">
+                            <input id="isComparable" name="isComparable" type="checkbox" class="form-control">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="storeImage" class="col-sm-2 col-form-label">Store image</label>
+                        <div class="form-group col-sm-2">
+                            <input type="file" name="storeImage" class="form-control-file" id="storeImage">
+                        </div>
+                    </div>
+
+
+                    <div class="admin-btn my-5 d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-info px-4" id="saveBtn" type="submit"><i class="fas fa-plus"></i> ADD STORE</button>
+                        </div>
+                    </div>
+                </form>    
+            </div>
+
+
+        </div>
+    </main>
+</div>
+<%-include("../shared/footer.ejs")  %> 

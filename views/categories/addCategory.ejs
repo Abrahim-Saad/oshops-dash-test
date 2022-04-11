@@ -1,0 +1,49 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+
+<div class="main-content">
+    <%-include("../shared/head.ejs")  %> 
+    
+    <main>
+        <div>
+            <div id='msg'>
+
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <div>
+                    <h2>Add Category</h2>
+                </div>
+                <div>
+                    <a href="/viewCategories">View all categories</a>
+                </div>
+            </div>
+
+            <div id="categoryForm" class="ml-3">
+                <form action="/addCategory" method="post" encType="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="categoryName" class="col-sm-2 col-form-label">Category name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="categoryName" class="form-control" id="categoryName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="categoryImage" class="col-sm-2 col-form-label">Category image</label>
+                        <div class="form-group col-sm-2">
+                            <input type="file" name="categoryImage" class="form-control-file" id="categoryImage">
+                        </div>
+                    </div>
+                    <div class="admin-btn my-5 d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-info px-4" id="saveBtn" type="submit"><i class="fas fa-plus"></i> ADD CATEGORY</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+         
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %> 

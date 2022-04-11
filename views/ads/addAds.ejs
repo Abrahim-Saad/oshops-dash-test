@@ -1,0 +1,61 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+
+<div class="main-content">
+    <%-include("../shared/head.ejs")  %> 
+
+    <main>
+        <div>
+            <div id='msg'>
+
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <div>
+                    <h2>Add advertisment</h2>
+                </div>
+                <div>
+                    <a href="/viewAds">View all advertisments</a>
+                </div>
+            </div>
+
+            <div id="advertismentForm" class="ml-3">
+                <form action="/addAdvertisment" method="post" encType="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="title" class="form-control" id="title">
+                        </div>
+                    </div>
+
+                    <div class="mb-5 row">
+                        <label for="isActive" class="col-sm-2 col-form-label">Is Active</label>
+                        <label class="switch form-group">
+                            <input id="isActive" name="isActive" type="checkbox" class="form-control">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="advertismentImage" class="col-sm-2 col-form-label">Advertisment image</label>
+                        <div class="form-group col-sm-2">
+                            <input type="file" name="advertismentImage" class="form-control-file" id="advertismentImage">
+                        </div>
+                    </div>
+                    
+                    <div class="admin-btn my-5 d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-info px-4" id="saveBtn" type="submit"><i class="fas fa-plus"></i> ADD
+                                Advertisments</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %> 
+

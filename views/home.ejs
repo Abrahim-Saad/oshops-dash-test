@@ -1,0 +1,111 @@
+
+<%-include("shared/header.ejs")  %> 
+<%-include("shared/navbar.ejs")  %> 
+
+
+<div class="main-content">
+    <%-include("shared/head.ejs")  %> 
+
+
+    <main>
+        <div id="Counter">
+            <div class="cards">
+                <div class="card-single">
+                    <div>
+                        <h1><%=counts.allStoresCount  %> </h1>
+                        <span>Stores</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-store"></i>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1><%=counts.allCategoriesCount  %></h1>
+                        <span>Categories</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-list"></i>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1><%=counts.allUersCount%></h1>
+                        <span>Uers</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="recent-grid">
+                <div class="stores">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Stores</h3>
+                            <a class="text-white btn bg-info" href="/viewStores">See all <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Logo</td>
+                                            <td>Website</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='recentStores'>
+                                        <% for( let index = 0; index < stores.length; index++ ) { %>
+                                            <tr>
+                                                <td><i class="fas fa-store" style="font-size: 20px"></i> <%=stores[index].storeName%></td>
+                                                <td><img src="<%=stores[index].storeLogoURL%>" alt="Jumia" width="55px"
+                                                        height="auto"></td>
+                                                <td><i class="fas fa-external-link-alt text-info" style=" font-size: 20px"></i> <a href="<%=stores[index].storeWebsite%>"
+                                                        target="_blank"><%=stores[index].storeWebsite%></a></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="categories">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Categories</h3>
+                            <a class="text-white btn bg-info" href="/viewCategories">See all <i class="fas fa-arrow-right"></i></a> 
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Logo</td>
+                                            <td>Name</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentCategories">
+                                        <% for( let index = 0; index < categories.length; index++ ) { %>
+                                            <tr>
+                                                <td><img src="<%=categories[index].categoryImageURL%>" alt="Jumia" width="55px"
+                                                        height="auto"></td>
+                                                <td><i class="far fa-folder-open text-danger" style="font-size: 25px;"></i> <%=categories[index].categoryName%></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<%-include("shared/footer.ejs")  %> 

@@ -1,0 +1,17 @@
+<header>
+    <h2>
+        <label for="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </label>
+        Dashboard
+    </h2>
+
+    <div class="user-wrapper">
+        <img src="../images/user.png" width="40px" height="40px" alt="user profile image">
+        <div id="getCurrentAdmin">
+            <h5><%=admin.firstName %> <%=admin.lastName %></h5>
+            <small><%=admin.role %></small>
+        </div>
+        <a href="/logout"><i class="fas fa-sign-out-alt" ></i></a>
+    </div>
+</header>

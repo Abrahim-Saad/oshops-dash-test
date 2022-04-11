@@ -1,0 +1,71 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+<div class="main-content">
+   
+    <%-include("../shared/head.ejs")  %> 
+
+    <main>
+        <div>
+            <div id='msg'>
+
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <div>
+                    <h2>Add admin</h2>
+                </div>
+                <div>
+                    <a href="/viewAdmins">View all admins</a>
+                </div>
+            </div>
+
+            <div class="ml-3">
+                <form action="/addAdmin" method="post">
+                    <div class="mb-3 row">
+                        <label for="firstName" class="col-sm-2 col-form-label">First name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="firstName" id="firstName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="lastName" class="col-sm-2 col-form-label">Last name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="lastName" id="lastName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="username" class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userName" id="userName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="role" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" name="role" id="role">
+                                <option value="" disabled selected>Choose...</option>
+                                <option value="admin">Admin</option>
+                                <option value="superAdmin">Super admin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="admin-btn my-5 d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-info px-4" id="saveBtn" type="submit">Add Admin</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %> 

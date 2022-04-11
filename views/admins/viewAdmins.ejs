@@ -1,0 +1,72 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+<div class="main-content">
+    <%-include("../shared/head.ejs")  %> 
+    
+    <main>
+        <div>
+            <div id='msg'>
+            </div>
+            <div class="mb-4">
+                <div>
+                    <h2>All admins</h2>
+                </div>
+            </div>
+            <div>
+                <table class="table text-center">
+                    <thead>
+                        <th>index</th>
+                        <th>Full Name</th>
+                        <th>User name</th>
+                        <th>Role</th>
+                        <th>update</th>
+                        <th>delete</th>
+                    </thead>
+                    <tbody id="adminTable">
+                        <% for( let index = 0; index < allAdmins.length; index++ ) { %>
+                            <tr>
+                                <td class="text-info"><%=index + 1%> -</td>
+                                <td><%=allAdmins[index].firstName%> <%=allAdmins[index].lastName%></td>
+                                <td><i class="fas fa-at text-success"></i> <%=allAdmins[index].userName%></td>
+                                <td><%=allAdmins[index].role%></td>
+                                
+                                <form action="/renderAdminPage/<%=allAdmins[index]._id%>" method="get">
+                                    <td><button class="btn btn-outline-info" onclick="onUpdate('<%=allAdmins[index]._id%>')"><i class="fas fa-pencil-alt"></i> Veiw & Update</button></td>
+                                </form>    
+
+                                <form action="/deleteAdmin/<%=allAdmins[index]._id%>" method="post">
+                                    <td><button class="btn btn-outline-danger" id="delete"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                                </form>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <div class="text-center d-flex justify-content-center">
+                    <div aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="previousPaginate()" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <div id="totalPages" class="d-flex">
+
+                            </div>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="nextPaginate()" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="info">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %> 

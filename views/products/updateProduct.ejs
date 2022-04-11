@@ -1,0 +1,159 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %>
+
+
+<div class="main-content">
+    
+    <%-include("../shared/head.ejs")  %> 
+
+    <main>
+        <div>
+            <div id='msg'>
+
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <div>
+                    <h2>Update Product</h2>
+                </div>
+                <div>
+                    <a href="/viewProducts">View all Products</a>
+                </div>
+            </div>
+
+            <div id="productForm" class="ml-3">
+                <form action="/updateProduct/<%=productId %>" method="post" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="productName" class="col-sm-2 col-form-label">Product name</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="<%=product.productName %>" name="productName" class="form-control" id="productName">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="productPrice" class="col-sm-2 col-form-label">Product price</label>
+                        <div class="col-sm-10">
+                            <input type="number" value="<%=product.price %>" name="price" class="form-control" id="productPrice">
+                        </div>
+                    </div>
+
+
+
+                    <div class="mb-3 row">
+                        <label for="productRate" class="col-sm-2 col-form-label">Product Rate</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" name="rate" id="productRate">
+                                <option value="" disabled>Choose rate...</option>
+                                <% for( let index = 1; index <= 5; index++ ) { %>
+                                    <% if (product.rate == index) { %>
+                                        <option selected value="<%=index%>"> <%=index%> </option>
+                                     
+                                    <% } else { %>
+                                        <option value="<%=index%>"> <%=index%> </option>
+                                    <% } %>
+                                <% } %>
+                                
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="productStore" class="col-sm-2 col-form-label">Store</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" name="storeId" id="productStore">
+                                <option disabled >Select Product Store </option>
+
+                                <% for( let index = 0; index < allStores.length; index++ ) { %>
+                                    <div class="form-check" class="mt-5">
+                                        <% if (storeId == allStores[index]._id) { %>
+                                            <option selected  value="<%=allStores[index]._id%>" id="<%=allStores[index]._id%>"><%=allStores[index].storeName%></option>
+                                        <% } else { %>
+                                            <option  value="<%=allStores[index]._id%>" id="<%=allStores[index]._id%>"><%=allStores[index].storeName%></option>
+                                            
+                                        <% } %>    
+                                        
+                                    </div>
+                                <% } %>
+            
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="productCategory" class="col-sm-2 col-form-label">Product Category</label>
+                        <div class="col-sm-10">
+                            <select name="categoryId" class="custom-select" id="productCategory">
+                                <option disabled >Select Product Category </option>
+                                <% for( let index = 0; index < allCategories.length; index++ ) { %>
+                                    <div class="form-check" class="mt-5">
+                                        <% if (allCategories[index]._id == categoryId) { %>
+                                            <option selected  value="<%=allCategories[index]._id%>" id="<%=allCategories[index]._id%>"><%=allCategories[index].categoryName%></option>
+                                        <% } else  { %>
+                                            <option  value="<%=allCategories[index]._id%>" id="<%=allCategories[index]._id%>"><%=allCategories[index].categoryName%></option>
+                                            
+                                        <% } %>    
+                                        
+                                    </div>
+                                <% } %>
+    
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-5 row">
+                        <label for="" class="col-sm-2 col-form-label">Product in Stock</label>
+                        <label class="switch form-group">
+                            <% if (product.inStock) { %>
+                                <input checked id="inStock" name="inStock" type="checkbox" class="form-control">
+                             
+                            <% } else { %>
+                                <input  id="inStock" name="inStock" type="checkbox" class="form-control">
+
+                            <% } %>    
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+
+                    <div class="mb-5 row">
+                        <label for="" class="col-sm-2 col-form-label">Top Product</label>
+                        <label class="switch form-group">
+                            <% if (product.topProduct) { %>
+                                <input checked id="topProduct" name="topProduct" type="checkbox" class="form-control">
+                             
+                            <% } else { %>
+                                <input  id="topProduct" name="topProduct" type="checkbox" class="form-control">
+
+                            <% } %> 
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+
+
+
+                    <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Product image</label>
+                        <div class="form-group col-sm-2">
+                            <input type="file" name="productImage" class="form-control-file" id="productImage">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="admin-btn my-5 d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-info px-4" id="saveBtn" type="submit"><i class="fas fa-pen"></i> UPDATE PRODUCT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %>

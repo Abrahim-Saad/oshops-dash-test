@@ -1,0 +1,77 @@
+<%-include("../shared/header.ejs")  %> 
+<%-include("../shared/navbar.ejs")  %> 
+
+
+<div class="main-content">
+    <%-include("../shared/head.ejs")  %>
+    
+    <main>
+        <div>
+            <div id='msg'>
+            </div>
+            <div class="mb-4">
+                <div>
+                    <h2>All stores</h2>
+                </div>
+            </div>
+            <div>
+                <table class="table text-center">
+                    <thead>
+                        <th>Index</th>
+                        <th>Store Name</th>
+                        <th>Logo</th>
+                        <th>Website</th>
+                        <th>Phone number</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody id="storeTable">
+                        <% for( let index = 0; index < allStores.length; index++ ) { %>
+                            <tr>
+                                <td class="text-info"><%=index + 1%> -</td>
+                                <td><i class="fas fa-store text-success" style="font-size: 20px;"></i> <%=allStores[index].storeName%></td>
+                                <td><img src="<%=allStores[index].storeLogoURL%>" alt="Jumia" width="55px"
+                                height="auto"></td>
+                                <td><i class="fas fa-external-link-alt text-info" style="font-size: 20px"></i> <%=allStores[index].storeWebsite%></td>
+                                <td><i class="fas fa-phone-alt text-success" style="font-size: 20px"></i> <%=allStores[index].telephoneNumbers%></td>
+
+                                <form action="/getStoreById/<%=allStores[index]._id%>" method="get">
+                                    <td><button class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i> Veiw & Update</button></td>
+                                </form>   
+                                
+                                <form action="/deleteStore/<%=allStores[index]._id%>" method="post">
+                                    <td><button class="btn btn-outline-danger" id="delete"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                                </form>    
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+                <div class="text-center d-flex justify-content-center">
+                    <div aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="previousPaginate()" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <div id="totalPages" class="d-flex">
+
+                            </div>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="nextPaginate()" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="info">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<%-include("../shared/footer.ejs")  %> 
